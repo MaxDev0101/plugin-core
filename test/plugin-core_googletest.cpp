@@ -9,6 +9,7 @@ using namespace Maxdev0101::Plugin_core;
 //------------------------------------------------------------------------
 TEST (TestSuite, SumTest)
 {
-	CircularBuffer circularBuffer(44100);
-    EXPECT_EQ (circularBuffer.read(0), 0);
+	CircularBuffer circularBuffer;
+    circularBuffer.setup(44100);
+    EXPECT_EQ (circularBuffer.process(0), 0);
 }

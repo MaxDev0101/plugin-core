@@ -9,39 +9,37 @@ namespace Plugin_core {
 //------------------------------------------------------------------------
 // CircularBuffer Implementation
 //------------------------------------------------------------------------
- 
-//--------------------------------------------------
-void CircularBuffer::resizeBufferOnSampleRateChange (int samplerate)
+void CircularBuffer::setup (double samplerate)
 {
-    maxSize = samplerate * 2;
+    int maxSize = static_cast<int>(samplerate * 2.f);
     buffer.assign (maxSize, 0.f);
-    writeIndex = 0;
 }
 
-//--------------------------------------------------
-void CircularBuffer::write (float sample)
+//------------------------------------------------------------------------
+void CircularBuffer::setDelayNormalized (double normalized)
 {
-    buffer[writeIndex] = sample;
-    writeIndex = (writeIndex + 1) % maxSize;
+    // e.g. 1.0f = 44100 kHz * 2
+    currentSampleDelay = normalized * buffer.size () *2;
+    // maybe lower the range for security
 }
 
-//--------------------------------------------------
-float CircularBuffer::read (int delaySamples) const
+//------------------------------------------------------------------------
+float CircularBuffer::process (float sample)
 {
-    int readIndex = (writeIndex - delaySamples + maxSize) % maxSize;
-    return buffer[readIndex];
-}
-
-//--------------------------------------------------
-float CircularBuffer::readInterpolated (float delaySamples) const
-{
-    int d1 = static_cast<int>(delaySamples);
-    int d2 = d1 + 1;
-    float frac = delaySamples - d1;
+    int writeIndex = readIndex + currentSampleDelay;
     
-    float sample1 = read (d1);
-    float sample2 = read (d2);
-    return sample1 + frac + (sample2 - sample1);
+    if (writeIndex >= currentSampleDelay)
+        writeIndex -= currentSampleDelay;
+    
+    buffer[writeIndex] = sample;
+    
+    float value = buffer[readIndex];
+    readIndex++;
+    
+    if (readIndex >= currentSampleDelay)
+        readIndex -= currentSampleDelay;
+    
+    return value;
 }
 
 } // namespace Plugin_core

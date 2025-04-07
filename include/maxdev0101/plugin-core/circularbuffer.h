@@ -15,21 +15,16 @@ namespace Plugin_core {
 class CircularBuffer
 {
 public:
-    CircularBuffer (int samplerate)
-    : maxSize (samplerate * 2)
-    , buffer (maxSize, 0.f)
-    , writeIndex(0)
-    {}
+    CircularBuffer () = default;
     
-    void resizeBufferOnSampleRateChange (int samplerate);
-    void write (float sample);
-    float read (int delaySamples) const;
-    float readInterpolated (float delaySamples) const;
+    void setup (double samplerate);
+    void setDelayNormalized (double normalized);
+    float process (float sample);
     
 private:
-    int maxSize;
     std::vector<float> buffer;
-    int writeIndex;
+    int readIndex = 0;
+    int currentSampleDelay = 44100;
 };
 
 } // namespace Plugin_core
