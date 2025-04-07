@@ -36,7 +36,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug ../plugin-core
 cmake --build .
 ```
 
-As soon as the project has been successfully built, you will find the plugin bundle in the build folder: ```Debug/plugin-core-googletest```
+As soon as the project has been successfully built, you will find the google test executable in the build folder: ```Debug/plugin-core-googletest```
 
 ## Further Infos
 >See also: https://github.com/steinbergmedia/vst3sdk

@@ -15,17 +15,17 @@ namespace Plugin_core {
 class CircularBuffer
 {
 public:
-    CircularBuffer () = default;
-    
-    void setup (double samplerate);
-    void setDelayNormalized (double normalized);
-    float process (float sample);
-    
+    CircularBuffer() = default;
+
+    void setup(double samplerate);
+    void setDelayNormalized(double normalized);
+    float process(float sample);
+
 private:
     std::vector<float> buffer;
-    int readIndex = 0;
+    int readIndex          = 0;
     int currentSampleDelay = 44100;
 };
 
 } // namespace Plugin_core
-} // namespace MaxDev0101
+} // namespace Maxdev0101
