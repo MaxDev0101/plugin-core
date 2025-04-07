@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 #include "maxdev0101/plugin-core/circularbuffer.h"
 
-namespace Maxdev0101 {
+namespace MaxDev0101 {
 namespace Plugin_core {
 
 //------------------------------------------------------------------------
@@ -43,4 +43,4 @@ float CircularBuffer::process(float sample)
 }
 
 } // namespace Plugin_core
-} // namespace Maxdev0101
+} // namespace MaxDev0101

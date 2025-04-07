@@ -5,7 +5,7 @@
 #include "maxdev0101/plugin-core/circularbuffer.h"
 #include "gtest/gtest.h"
 
-using namespace Maxdev0101::Plugin_core;
+using namespace MaxDev0101::Plugin_core;
 //------------------------------------------------------------------------
 TEST (TestSuite, SumTest)
 {

@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace Maxdev0101 {
+namespace MaxDev0101 {
 namespace Plugin_core {
 
 //------------------------------------------------------------------------
@@ -28,4 +28,4 @@ private:
 };
 
 } // namespace Plugin_core
-} // namespace Maxdev0101
+} // namespace MaxDev0101
