@@ -20,24 +20,23 @@ void CircularBuffer::setDelayNormalized(double normalized)
 {
     // e.g. 1.0f = 44100 kHz * 2
     currentSampleDelay = normalized * buffer.size() * 2;
+    writeIndex         = writeIndex % currentSampleDelay;
     // maybe lower the range for security
 }
 
 //------------------------------------------------------------------------
 float CircularBuffer::process(float sample)
 {
-    int writeIndex = readIndex + currentSampleDelay;
+    if (currentSampleDelay == 0)
+        return sample;
+
+    auto value         = buffer[writeIndex];
+    buffer[writeIndex] = sample;
+
+    writeIndex++;
 
     if (writeIndex >= currentSampleDelay)
         writeIndex -= currentSampleDelay;
-
-    buffer[writeIndex] = sample;
-
-    float value = buffer[readIndex];
-    readIndex++;
-
-    if (readIndex >= currentSampleDelay)
-        readIndex -= currentSampleDelay;
 
     return value;
 }

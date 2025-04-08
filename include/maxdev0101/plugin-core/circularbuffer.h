@@ -23,7 +23,7 @@ public:
 
 private:
     std::vector<float> buffer;
-    int readIndex          = 0;
+    int writeIndex         = 0;
     int currentSampleDelay = 44100;
 };
 
