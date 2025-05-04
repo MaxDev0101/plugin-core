@@ -18,12 +18,11 @@ void CircularBuffer::setup(double samplerate)
 //------------------------------------------------------------------------
 void CircularBuffer::setDelayNormalized(double normalized)
 {
-    // e.g. 1.0f = 44100 kHz * 2
-    const double bufSize = static_cast<double>(buffer.size() * 2);
+    // e.g. 1.0f = 44100 kHz
+    const double bufSize = static_cast<double>(buffer.size());
     currentSampleDelay   = static_cast<int>(normalized * bufSize);
     if (currentSampleDelay > 0)
         writeIndex = writeIndex % currentSampleDelay;
-    // maybe lower the range for security
 }
 
 //------------------------------------------------------------------------
