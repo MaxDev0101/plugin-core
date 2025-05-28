@@ -42,5 +42,11 @@ float CircularBuffer::process(float sample)
     return value;
 }
 
+//------------------------------------------------------------------------
+void CircularBuffer::reset()
+{
+    buffer.assign(buffer.size(), 0.f);
+}
+
 } // namespace Plugin_core
 } // namespace MaxDev0101

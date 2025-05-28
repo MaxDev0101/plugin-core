@@ -20,6 +20,7 @@ public:
     void setup(double samplerate);
     void setDelayNormalized(double normalized);
     float process(float sample);
+    void reset();
 
 private:
     std::vector<float> buffer;
